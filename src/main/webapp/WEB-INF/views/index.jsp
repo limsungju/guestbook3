@@ -10,7 +10,7 @@
 <title>방명록</title>
 </head>
 <body>
-	<form action="<%=request.getContextPath() %>/gb" method="post">
+	<form action="${pageContext.servletContext.contextPath }" method="post">
 	<input type='hidden' name='a' value='add'>
 	<table border=1 width=500>
 		<tr>
@@ -25,15 +25,15 @@
 		</tr>
 	</table>
 	</form>
-	
-	<c:forEach items="${list }" var="vo">
+	<c:set var="count" value="${fn:length(list) }" />
+	<c:forEach items="${list }" var="vo" varStatus="status">
 		<br>
 		<table width=510 border=1>
 			<tr>
-				<td>[${vo.no }]</td>
+				<td>[${count-status.index }]</td>
 				<td>${vo.name }</td>
 				<td>${vo.regDate }</td>
-				<td><a href="">삭제</a></td>
+				<td><a href="${pageContext.servletContext.contextPath }/delete/${vo.no }">삭제</a></td>
 			</tr>
 			<tr>
 				<td colspan=4>Hello World</td>
